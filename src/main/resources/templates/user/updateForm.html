@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:replace="common/script" >
+</th:block>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<th:block th:replace="fragment/header :: headerFragment"></th:block>
+        <div class="container">
+            <form>
+                <input type="hidden" id="id" th:value="${user.getId()}">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" th:value="${user.getUsername()}"  class="form-control" placeholder="Enter id" id="username" readonly>
+                </div>
+                <div th:if="${user.getOauth() == null}" class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" placeholder="Enter password" id="password">
+                </div>
+                <div th:if="${user.getOauth() != null}" class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" th:value="${user.getEmail()}" class="form-control" placeholder="Enter email" readonly>
+                </div>
+                <div th:if="${user.getOauth() == null}" class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" th:value="${user.getEmail()}" class="form-control" placeholder="Enter email" id="email">
+                </div>
+            </form>
+            <button id="btnUpdate" class="btn btn-primary">Submit</button>
+        </div>
+<script type="text/javascript" th:src="@{/js/user.js}" ></script>
+    <th:block th:replace="fragment/footer :: footerFragment" />
+</body>
+</html>

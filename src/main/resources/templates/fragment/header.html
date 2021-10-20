@@ -1,0 +1,46 @@
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" val="principal"/>
+</sec:authorize>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<!--headerFragment 선언-->
+<div th:fragment="headerFragment">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+<!--            sec:authorize="isAnonymous()"-->
+                   <ul sec:authorize="!isAuthenticated()" class="navbar-nav" >
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/loginForm">login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/joinForm">Join</a>
+                        </li>
+                    </ul>
+                    <ul sec:authorize="isAuthenticated()" class="navbar-nav" >
+<!--                        -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/board/saveForm">Write</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/updateForm">MyPage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+        </div>
+    </nav>
+</div>
+

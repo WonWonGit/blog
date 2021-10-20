@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<th:block th:replace="common/script"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<body>
+<th:block th:replace="fragment/header :: headerFragment"/>
+<div class="container">
+    <button class="btn btn-secondary" th:onclick="history.back()">목록으로</button>
+    <th:block th:if="${principalDetail.getUsername()}==${board.user.username}">
+        <a th:href="@{/board/updateForm/{id}(id=${board.id})}" class="btn btn-warning">수정</a>
+        <button id="btnDelete" class="btn btn-danger">삭제</button>
+    </th:block>
+    <th:block th:unless="${principalDetail.getUsername()}==${board.user.username}">
+    </th:block>
+
+    <div>
+        글번호 : <span id="id"><i th:text="${board.id}"> </i></span>
+        작성자 : <span><i th:text="${board.user.username}"></i></span>
+    </div>
+    <div class="container">
+        <h3 th:text="${board.title}"></h3>
+    </div>
+    <hr/>
+    <div class="container">
+        <div th:utext="${board.content}">
+        </div>
+    </div>
+    <div class="card">
+        <form>
+            <input type="hidden" id="boardId" th:value="${board.id}">
+            <div class="card-body">
+                <textarea id="replyContent" class="form-control" rows="1"></textarea>
+            </div>
+            <div class="card-footer">
+                <button id="btnReplySave" class="btn btn-primary">등록</button>
+            </div>
+        </form>
+    </div>
+    <div class="card">
+        <div class="card-header">댓글 리스트</div>
+        <ul id="replyBox" class="list-group">
+            <li th:each="replys : ${board.reply}" id="replyItems"
+                class="list-group-item d-flex justify-content-between">
+                <div th:text=""></div>
+                <div class="d-flex">
+                    <div class="font-italic">작성자 &nbsp;</div>
+                    <button class="badge">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/board.js}"></script>
+</body>
+</html>

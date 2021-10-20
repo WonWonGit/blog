@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    mode: HTML5
+
+  datasource: #DB ????
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect # ??? ??? ??(?? - https://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/session-configuration.html#configuration-optional-dialects)
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+      ddl-auto: update
+      show-sql: true # ??? jpa ????
+    generate-ddl: true
+
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+cos:
+  key: cos1234
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/script" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<body>
+<th:block th:replace="fragment/header :: headerFragment"/>
+    <div class="container contents-wrap">
+        <div class="">
+        <form action="/auth/loginProc" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control" placeholder="Enter email" id="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter password" id="password">
+            </div>
+        <button id="btnLogin" class="btn btn-primary">로그인</button>
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=718e13ae7d09badc09a7adf15316b803&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code"><img height="38px" th:src="@{/img/kakaoLoginBtn.png}"></a>
+        </form>
+        </div>
+    </div>
+        <th:block th:replace="fragment/footer :: footerFragment"/>
+</body>
+<script>
+    $('.summernote').summernote({
+        tabsize: 2,
+        height: 300
+    });
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="common/script">
+</th:block>
+<body>
+<th:block th:replace="fragment/header :: headerFragment">
+</th:block>
+<div class="container">
+    <div th:each="b: ${boards}" class="card m-1">
+        <div class="card-body">
+            <h4 class="card-title" th:text="${b.title}"></h4>
+            <a th:href="@{/board/{id}(id=${b.id})}" class="btn btn-primary">글 보기</a>
+        </div>
+    </div>
+</div>
+ <ul class="pagination justify-content-center">
+        <li th:if="${boards.first}" class="page-item disabled">
+            <a class="page-link" th:href="@{/(page=${boards.number-1})}">Previous</a>
+            <!--여기도 자꾸 오류가 뜨는데.. 왜뜨는지 모르겠습니다 ! 밑에 +해줄때는 괜찮은데 -만 붙이면 오류가 뜹니다 !
+            ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
+            -->
+        </li>
+        <li th:unless="${boards.first}" class="page-item">
+            <a class="page-link" th:href="@{/(page=${boards.number-1})}">Previous</a>
+        </li>
+     <li th:if="${boards.last}" class="page-item disabled">
+         <a class="page-link" th:href="@{/(page=${boards.number+1})}">Next</a>
+     </li>
+     <li th:unless="${boards.last}" class="page-item">
+         <a class="page-link" th:href="@{/(page=${boards.number+1})}">Next</a>
+     </li>
+ </ul>
+<th:block th:replace="fragment/footer :: footerFragment"></th:block>
+</body>
+</html>
